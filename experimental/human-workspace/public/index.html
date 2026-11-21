@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Gemeinsam mit KI arbeiten und Feedback an der richtigen Stelle festhalten.">
+  <title>Gemeinsam — Arbeitsraum</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Gemeinsam Startseite"><span class="brand-icon">g.</span> gemeinsam<span class="brand-note">Arbeitsraum</span></a>
+    <span class="local-label">Lokaler Prototyp</span>
+  </header>
+  <main>
+    <div class="intro">
+      <div><p class="eyebrow">MENSCH + KI</p><h1>Zeig, was du meinst.</h1><p class="lead">Eine Textstelle, ein Bildpunkt, ein Moment im Video. Feedback bleibt dort, wo es hingehört.</p></div>
+      <div class="session"><span id="connection">Verbindung wird aufgebaut</span><small id="session-id"></small></div>
+    </div>
+    <div class="workspace">
+      <section class="artifact-panel" aria-label="Gemeinsame Arbeitsansicht">
+        <div class="panel-top"><div><span class="kicker">GEMEINSAME ANSICHT</span><h2 id="artifact-title">Unsere Produktidee</h2></div><span id="revision" class="version"></span></div>
+        <div class="toolbar">
+          <button id="show-text" class="tab active">Text</button>
+          <label class="button ghost file-label">Bild oder Video öffnen<input id="open-file" type="file" accept="image/png,image/jpeg,image/webp,video/mp4,video/webm"></label>
+          <select id="asset-select" aria-label="Bereits geöffnete Datei"><option value="document">Unsere Produktidee</option></select>
+        </div>
+        <div id="text-view" class="text-view">
+          <label class="sr-only" for="document">Gemeinsamer Text</label>
+          <textarea id="document" readonly spellcheck="false"></textarea>
+          <div class="edit-actions"><button id="edit-text" class="subtle">Text bearbeiten</button><button id="save-text" class="ghost" hidden>Neue Version speichern</button><button id="cancel-edit" class="subtle" hidden>Änderung verwerfen</button></div>
+        </div>
+        <div id="media-view" class="media-view" hidden><div id="media-stage" class="media-stage"></div><p id="media-help">Klicke auf die Stelle, die du meinst.</p></div>
+        <div class="capture-bar"><div><strong id="capture-title">Die richtige Stelle festhalten</strong><p id="capture-hint">Text auswählen und die Auswahl festhalten.</p></div><button id="capture" class="primary">Stelle festhalten</button></div>
+        <div class="mirror-note"><span class="mirror-symbol" aria-hidden="true">▣</span><p><strong>Dieselbe Sitzung, auch in einer zweiten Ansicht.</strong><br>Öffne diese Adresse in einem zweiten Tab. Gespeicherte Texte, Dateiauswahl und Feedback werden abgeglichen. „Zur Stelle“ teilt auch den Videozeitpunkt.</p><a id="mirror-link" target="_blank" rel="noopener" href="/">Zweite Ansicht öffnen</a></div>
+      </section>
+      <aside class="feedback-panel" aria-label="Feedback">
+        <div class="feedback-heading"><span class="kicker">DEINE RÜCKMELDUNG</span><h2>Hier wird es konkret.</h2><p>Du kennst die Richtung. Die KI braucht die richtige Referenz.</p></div>
+        <div id="anchor-card" class="anchor-card empty"><span class="anchor-label">Noch keine Stelle ausgewählt</span><p id="anchor-detail">Wähle links eine Stelle aus.</p></div>
+        <form id="feedback-form">
+          <label for="comment">Was soll sich hier ändern?</label>
+          <textarea id="comment" maxlength="8000" placeholder="Zum Beispiel: Dieser Abschnitt ist zu technisch. Erkläre ihn mit einem konkreten Beispiel." required></textarea>
+          <div class="attachments-bar"><label class="button subtle file-label">Bild oder Video anhängen<input id="attach-file" type="file" multiple accept="image/png,image/jpeg,image/webp,video/mp4,video/webm"></label><small>Bis zu 5 Dateien · je 25 MiB</small></div>
+          <ul id="draft-attachments" class="draft-attachments"></ul>
+          <button id="submit-feedback" type="submit" class="primary full">Feedback festhalten</button>
+          <p class="privacy-note">Text und Dateien bleiben in diesem lokalen Arbeitsraum. Eine KI ist in dieser Vorschau noch nicht verbunden.</p>
+        </form>
+        <div id="notice" class="notice" role="status" aria-live="polite"></div>
+      </aside>
+    </div>
+    <section class="history-section" aria-label="Festgehaltenes Feedback">
+      <div class="history-heading"><div><span class="kicker">GEMEINSAM WEITERARBEITEN</span><h2>Was wir verändern wollen <span id="feedback-count">0</span></h2></div><button id="export" class="ghost">Rückmeldungen exportieren</button></div>
+      <div id="feedback-list" class="feedback-list"><div class="empty-history"><span aria-hidden="true">✳</span><p>Hier entsteht eure gemeinsame Spur.<br><small>Jede Rückmeldung behält ihre Stelle, Version und Anhänge.</small></p></div></div>
+    </section>
+    <footer>Die lokale Vorschau prüft den Feedback-Ablauf. Cloud-Desktop, KI-Ausführung und Konnektoren sind als nächste Integrationen beschrieben.</footer>
+  </main>
+</body>
+</html>
